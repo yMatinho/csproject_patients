@@ -1,0 +1,47 @@
+version: "3.8"
+
+#Docker Networks
+networks:
+  csproject:
+    driver: bridge
+    external: true
+
+#Volumes
+volumes:
+  dbdata:
+    driver: local
+  patients-api-data:
+    name: patients-api-data
+
+  # Workflow
+services:
+  patients_api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: patients_api
+    ports:
+      - 8082:80
+    volumes:
+      - patients-api-data:/var/www/html
+    depends_on:
+      - patients_database
+    networks:
+      - csproject
+
+  patients_database:
+    image: mysql:5.7
+    container_name: patients_database
+    platform: linux/amd64
+    command: --init-file /database/init.sql
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: patients_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - ./database/init.sql:/database/init.sql
+    networks:
+      - csproject
