@@ -5,8 +5,8 @@ START TRANSACTION;
 
 CREATE TABLE IF NOT EXISTS `patients` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL UNIQUE,
-  `age` integer NOT NULL UNIQUE,
+  `name` varchar(255) NOT NULL,
+  `age` integer NOT NULL,
   `weight` float NOT NULL,
   `height` int NOT NULL,
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP NOT NULL,
@@ -17,6 +17,6 @@ ALTER TABLE `patients`
 ADD PRIMARY KEY (`id`);
 
 ALTER TABLE `patients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 COMMIT;
