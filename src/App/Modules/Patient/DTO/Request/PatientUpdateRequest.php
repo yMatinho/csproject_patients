@@ -9,10 +9,10 @@ class PatientUpdateRequest
 
     public function __construct(
         private int $patientId,
-        private string $name,
-        private int $age,
-        private int $height,
-        private float $weight,
+        private ?string $name,
+        private ?int $age,
+        private ?int $height,
+        private ?float $weight,
     ) {
     }
 
@@ -32,22 +32,22 @@ class PatientUpdateRequest
         return $this->patientId;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
     
-    public function getAge(): int
+    public function getAge(): ?int
     {
         return $this->age;
     }
 
-    public function getHeight(): int
+    public function getHeight(): ?int
     {
         return $this->height;
     }
 
-    public function getWeight(): float
+    public function getWeight(): ?float
     {
         return $this->weight;
     }
